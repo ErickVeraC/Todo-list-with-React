@@ -7,19 +7,8 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <header className=" text-white p-4 text-center">
-      <h1 className="text-4xl">To-do List</h1>
-      <h2 className="text-2xl mt-2">Erick Vera</h2>
-      <h4 className="text-lg mt-1">
-        <a
-          href="http://www.erickvcoder.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white underline"
-        >
-          www.erickvcoder.com
-        </a>
-      </h4>
+    <header className=" text-white p-4 text-center font-montserrat">
+      <h1 className="text-4xl">TODO List</h1>
     </header>
   );
 };

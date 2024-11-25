@@ -10,7 +10,7 @@ interface TodoItemProps {
 
 const TodoItem: React.FC<TodoItemProps> = ({ todo, onUpdate, onDelete }) => {
   return (
-    <article className="grid grid-cols-4 items-center p-2 border-b">
+    <article className="grid grid-cols-4 items-center p-2 border-b font-montserrat">
       <div className="col-span-1">
         <button
           onClick={() => onUpdate(todo.id, { done: !todo.done })}

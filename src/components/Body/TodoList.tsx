@@ -49,7 +49,7 @@ const TodoList: React.FC = () => {
   };
 
   return (
-    <main className="flex flex-col items-center justify-start min-h-screen w-full">
+    <main className="flex flex-col items-center justify-start w-full font-montserrat">
       <section className="w-full max-w-2xl p-4 rounded shadow-md bg-white px-24 mb-4">
         <div>
           <div className="relative pt-4">
