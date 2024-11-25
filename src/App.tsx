@@ -5,9 +5,9 @@ function App() {
   return (
     <>
       <Header />
-      <div className="container mx-auto p-4">
+      <main className="container mx-auto p-4">
         <TodoList />
-      </div>
+      </main>
     </>
   );
 }

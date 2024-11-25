@@ -42,35 +42,61 @@ const TodoList: React.FC = () => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleAddTodo();
+    }
+  };
+
   return (
-    <div>
-      <h1 className="text-2xl mb-4">To-do List</h1>
-      <div className="mb-4">
-        <input
-          type="text"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
-          placeholder="Add a new task"
-          className="p-2 border"
-        />
-        <button
-          onClick={handleAddTodo}
-          className="ml-2 p-2 bg-blue-500 text-white"
-        >
-          Add
-        </button>
-      </div>
-      <div>
-        {todos.map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            onUpdate={handleUpdateTodo}
-            onDelete={handleDeleteTodo}
-          />
-        ))}
-      </div>
-    </div>
+    <main className="flex flex-col items-center justify-start min-h-screen w-full">
+      <section className="w-full max-w-2xl p-4 rounded shadow-md bg-white px-24 mb-4">
+        <div>
+          <div className="relative pt-4">
+            <input
+              type="text"
+              value={newTodo}
+              onChange={(e) => setNewTodo(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="What would you like to do"
+              className="w-full p-2 border-b-2 border-gray-300 focus:outline-none focus:border-blue-500"
+            />
+          </div>
+          <div className="pt-8">
+            <button
+              onClick={handleAddTodo}
+              className="w-1/2 p-2 bg-amber-500 text-white rounded mx-auto block shadow-lg hover:bg-transparent hover:text-black transition ease-in-out duration-200"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </section>
+      <section className="w-full max-w-2xl p-4 rounded shadow-md bg-white px-24">
+        <div>
+          <h3 className="text-center text-2xl py-6">Your tasks list</h3>
+          <nav className="grid grid-cols-4 gap-4">
+            <div className="col-span-1">
+              <p className="text-center">Status</p>
+            </div>
+            <div className="col-span-2">
+              <p className="text-center">Task</p>
+            </div>
+            <div className="col-span-1">
+              <p className="text-center">Remove</p>
+            </div>
+          </nav>
+          {todos.map((todo) => (
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              onUpdate={handleUpdateTodo}
+              onDelete={handleDeleteTodo}
+            />
+          ))}
+        </div>
+      </section>
+    </main>
   );
 };
 
