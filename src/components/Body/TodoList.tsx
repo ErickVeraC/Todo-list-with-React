@@ -38,13 +38,15 @@ const TodoList: React.FC = () => {
     id: number,
     updates: { text?: string; done?: boolean }
   ) => {
-    const updatedTodo = await updateTodo(id, updates);
-    setTodos(todos.map((todo) => (todo.id === id ? updatedTodo : todo)));
+    await updateTodo(id, updates);
+    const updatedTodos = await getTodos();
+    setTodos(updatedTodos);
   };
 
   const handleDeleteTodo = async (id: number) => {
     await deleteTodo(id);
-    setTodos(todos.filter((todo) => todo.id !== id));
+    const updatedTodos = await getTodos();
+    setTodos(updatedTodos);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
