@@ -6,12 +6,14 @@ import {
   deleteTodo,
 } from "../../modules/services/todoService";
 import TodoItem from "./TodoItem";
+import clsx from "clsx";
 
 const TodoList: React.FC = () => {
   const [todos, setTodos] = useState<
     { id: number; text: string; done: boolean }[]
   >([]);
   const [newTodo, setNewTodo] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -23,9 +25,12 @@ const TodoList: React.FC = () => {
 
   const handleAddTodo = async () => {
     if (newTodo.trim()) {
-      const todo = await addTodo(newTodo);
-      setTodos([...todos, todo]);
+      setIsLoading(true);
+      await addTodo(newTodo);
+      const updatedTodos = await getTodos();
+      setTodos(updatedTodos);
       setNewTodo("");
+      setIsLoading(false);
     }
   };
 
@@ -63,11 +68,19 @@ const TodoList: React.FC = () => {
             />
           </div>
           <div className="pt-8">
+            <input
+              type="text"
+              value={newTodo}
+              onChange={(e) => setNewTodo(e.target.value)}
+              onKeyPress={handleKeyPress}
+              disabled={isLoading}
+            />
             <button
               onClick={handleAddTodo}
-              className="w-1/2 p-2 bg-amber-500 text-white rounded mx-auto block shadow-lg hover:bg-transparent hover:text-black transition ease-in-out duration-200"
+              disabled={isLoading}
+              className={clsx("btn", { "btn-loading": isLoading })}
             >
-              Add
+              {isLoading ? "is loading..." : "Add Todo"}
             </button>
           </div>
         </div>
